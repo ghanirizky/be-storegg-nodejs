@@ -1,0 +1,62 @@
+<table id="example2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama game</th>
+            <th>Kategori</th>
+            <th>Nominal</th>
+            <th>Status</th> 
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let num = 1 %>
+        <% vouchers.forEach(voucher => {  %>
+            <tr>
+                <td>
+                    <%= num++ %>
+                </td>
+                <td>
+                    <%= voucher.name %> 
+                </td>
+                <td>
+                    <%= voucher?.category?.name ?? '-' %> 
+                </td>
+                <td>
+                     <% voucher.nominals.forEach(nominal => { %>
+                        <span class="badge badge-warning">
+                            <%= nominal.coinName %> <%= nominal.coinQuantity %>
+                        </span>
+                    <% }) %>
+                </td>
+                <td>
+                    <% 
+                    let className = voucher.status === 'Y' ? 'badge badge-success' : "badge badge-danger"
+                    let text = voucher.status === 'Y' ? 'Aktif' : 'Tidak Aktif'
+                    %> 
+                    <span class= "<%= className %>" >
+                        <%= text %> 
+                    </span>
+                </td>
+                <td>
+                    <form action="/voucher/status/<%= voucher._id %>?_method=PUT" method="post" style="display: inline-block;">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-folder"></i>
+                            <%= voucher.status === 'Y' ? 'Matikan' : 'Aktifkan' %> 
+                        </button>
+                    </form>
+                    <a href="/voucher/edit/<%= voucher._id %>" class="btn btn-info btn-sm">
+                        <i class="fas fa-pencil-alt"></i>
+                        Ubah
+                    </a>
+                    <form style="display: inline-block;" action="/voucher/edit/<%= voucher._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                            Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

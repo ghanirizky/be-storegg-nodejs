@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<%- include ../../partials/header.ejs %>
+
+    <html lang="en">
+
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+            <%- include ../../partials/navbar.ejs %>
+                <%- include ../../partials/sidebar.ejs %>
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
+                        <section class="content-header">
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h1>Bank</h1>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <ol class="breadcrumb float-sm-right">
+                                            <li class="breadcrumb-item "><a href="/">Home</a></li>
+                                            <li class="breadcrumb-item "><a href="/bank">Bank</a></li>
+                                            <li class="breadcrumb-item active">Tambah</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+
+                        <!-- Main content -->
+                        <section class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <!-- /.card-header -->
+                                            <div class="card-body">
+                                                <div class="col-12">
+                                                    <!-- general form elements -->
+                                                    <div class="card card-primary">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Form Tambah Bank</h3>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <!-- form start -->
+                                                        <form action="/bank/create" method="POST">
+                                                            <div class="card-body">
+                                                                <div class="form-group">
+                                                                    <label for="name">Nama Pemilik</label>
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        id="name" placeholder="Masukan nama pemilik" required>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Nama Bank</label>
+                                                                    <select class="form-control select2"
+                                                                        style="width: 100%;"
+                                                                    name="bankName"
+                                                                    required    
+                                                                    >
+                                                                        <option value="" selected disabled hidden>Pilih Bank</option>
+                                                                        <option value="BCA">BCA</option>
+                                                                        <option value="BNI">BNI</option>
+                                                                        <option value="BRI">BRI</option>
+                                                                        <option value="Jago">Jago</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="noRekening">No Rekening</label>
+                                                                    <input type="text" name="noRekening"
+                                                                        class="form-control" id="noRekening"
+                                                                        placeholder="Masukan nama kategori" required>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.card-body -->
+
+                                                            <div class="card-footer">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- /.form -->
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </section>
+                        <!-- /.content -->
+                    </div>
+                    <%- include ../../partials/footer.ejs %>
+        </div>
+        <%- include ../../partials/js.ejs %>
+    </body>
+
+    </html>

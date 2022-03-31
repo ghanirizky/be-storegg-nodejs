@@ -1,0 +1,60 @@
+<table id="example2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Type</th>
+            <th>Bank</th>
+            <th>Status</th> 
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let num = 1 %>
+        <% payments.forEach(payment => {  %>
+            <tr>
+                <td>
+                    <%= num++ %>
+                </td>
+                <td>
+                    <%= payment.type %> 
+                </td>
+                <td>
+                     <% payment.banks.forEach(bank => { %>
+                        <span class="badge badge-warning">
+                            <%= bank.name %> -
+                            <%= bank.nameBank %> -
+                            <%= bank.noRekening %>
+                        </span>
+                    <% }) %>
+                </td>
+                <td>
+                    <% 
+                    let className = payment.status === 'Y' ? 'badge badge-success' : "badge badge-danger"
+                    let text = payment.status === 'Y' ? 'Aktif' : 'Tidak Aktif'
+                    %> 
+                    <span class= "<%= className %>" >
+                        <%= text %> 
+                    </span>
+                </td>
+                <td>
+                    <form action="/payment/status/<%= payment._id %>?_method=PUT" method="post" style="display: inline-block;">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-folder"></i>
+                            <%= payment.status === 'Y' ? 'Matikan' : 'Aktifkan' %> 
+                        </button>
+                    </form>
+                    <a href="/payment/edit/<%= payment._id %>" class="btn btn-info btn-sm">
+                        <i class="fas fa-pencil-alt"></i>
+                        Ubah
+                    </a>
+                    <form style="display: inline-block;" action="/payment/edit/<%= payment._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                            Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

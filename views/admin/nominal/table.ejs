@@ -1,0 +1,42 @@
+<table id="example2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama Koin</th>
+            <th>Jumlah Koin</th>
+            <th>Harga Koin</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let num = 1 %>
+        <% nominals.forEach(nominal => {  %>
+            <tr>
+                <td>
+                    <%= num++ %>
+                </td>
+                <td>
+                    <%= nominal.coinName %> 
+                </td>
+                <td>
+                    <%= nominal.coinQuantity %> 
+                </td>
+                <td>
+                    Rp. <%= nominal.price %> 
+                </td>
+                <td>
+                    <form action="/nominal/edit/<%= nominal._id %>?_method=DELETE" method="post">
+                        <a href="/nominal/edit/<%= nominal._id %>" class="btn btn-info btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                            Ubah
+                        </a>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                            Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

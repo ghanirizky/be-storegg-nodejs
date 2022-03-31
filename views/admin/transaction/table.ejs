@@ -1,0 +1,87 @@
+
+
+<table id="example2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama game</th>
+            <th>Item</th>
+            <th>Total harga</th>
+            <th>Status</th>
+            <th>Nama Player</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let num=1 %>
+            <% transactions.forEach(transaction=> { %>
+                <tr>
+                    <td>
+                        <%= num++ %>
+                    </td>
+
+                    <!-- Nama Game -->
+                    <td>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <img width="48px" height="48px"
+                                    src="/uploads/<%= transaction.historyVoucherTopup.thumbnail  %>" alt="thumbnail">
+
+                            </li>
+                        </ul>
+                        <%= transaction?.historyVoucherTopup?.gameName %>
+                            <br>
+                            <%= transaction?.historyVoucherTopup?.category %>
+                    </td>
+
+                    <!-- Item -->
+
+                    <td>
+                        <%= transaction?.historyVoucherTopup?.coinQuantity %>
+                            <%= transaction?.historyVoucherTopup?.coinName %>
+                    </td>
+                    
+                    <!-- Total Harga -->
+                    <td>
+                        <%= transaction?.value ?? '-' %>
+                    </td>
+
+                    <!-- Status -->
+                    <td>
+                        <% 
+                        let className =  transaction?.status==='pending' ? 'warning' 
+                        : transaction?.status==='success' ? 'success' 
+                        : 'danger'
+                        %>
+                            <span class="badge badge-<%= className %> trans-status">
+                                <%= transaction.status %>
+                            </span>
+                    </td>
+
+                    <!-- Nama Player -->
+                    <td>
+                        <%= transaction?.player?.name ?? '-' %>
+                    </td>
+
+                    <td>
+                        <% if (transaction?.status == 'pending') { %>
+                            <form style="display: inline-block;"
+                                action="/transaction/status/<%= transaction._id %>?_method=PUT&status=failed" method="post">
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-times-circle"></i>
+                                    Tolak
+                                </button>
+                            </form>
+                            <form style="display: inline-block;"
+                                action="/transaction/status/<%= transaction._id %>?_method=PUT&status=success" method="post">
+                                <button class="btn btn-info btn-sm">
+                                    <i class="fas fa-check"></i>
+                                    Terima
+                                </button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+                <% }) %>
+    </tbody>
+</table>

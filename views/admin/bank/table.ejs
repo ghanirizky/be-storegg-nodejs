@@ -1,0 +1,42 @@
+<table id="example2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Nama Pemilik</th>
+            <th>Nama Bank</th>
+            <th>No Rekening</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% let num = 1 %>
+        <% banks.forEach(bank => {  %>
+            <tr>
+                <td>
+                    <%= num++ %>
+                </td>
+                <td>
+                    <%= bank.name %> 
+                </td>
+                <td>
+                    <%= bank.bankName %> 
+                </td>
+                <td>
+                    <%= bank.noRekening %> 
+                </td>
+                <td>
+                    <form action="/bank/edit/<%= bank._id %>?_method=DELETE" method="post">
+                        <a href="/bank/edit/<%= bank._id %>" class="btn btn-info btn-sm">
+                            <i class="fas fa-pencil-alt"></i>
+                            Ubah
+                        </a>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash"></i>
+                            Hapus
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
