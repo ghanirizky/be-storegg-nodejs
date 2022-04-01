@@ -32,12 +32,19 @@ module.exports = {
         .populate("nominals")
         .populate("user", "_id name phoneNumber");
 
+      const payment = await Payment.find().populate('banks')
+
       if (!voucher)
         return res
           .status(404)
           .json({ data: "Voucher game tidak di temukan !" });
 
-      res.status(200).json({ data: voucher });
+      if (!payment)
+        return res
+          .status(404)
+          .json({ data: "Metode pembayaran tidak di temukan !" });
+
+      res.status(200).json({ data: voucher, payment: payment });
     } catch (error) {
       res
         .status(500)
@@ -348,7 +355,7 @@ module.exports = {
           fields: error.errors,
         });
       }
-      next(error)
+      next(error);
     }
   },
 };
