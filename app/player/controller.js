@@ -44,7 +44,12 @@ module.exports = {
           .status(404)
           .json({ data: "Metode pembayaran tidak di temukan !" });
 
-      res.status(200).json({ data: voucher, payment: payment });
+      res.status(200).json({
+        data : {
+          voucher,
+          payment 
+        }
+      });
     } catch (error) {
       res
         .status(500)
