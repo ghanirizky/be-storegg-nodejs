@@ -32,7 +32,7 @@ module.exports = {
         .populate("nominals")
         .populate("user", "_id name phoneNumber");
 
-      const payment = await Payment.find().populate('banks')
+      const payment = await Payment.find().populate("banks");
 
       if (!voucher)
         return res
@@ -45,10 +45,10 @@ module.exports = {
           .json({ data: "Metode pembayaran tidak di temukan !" });
 
       res.status(200).json({
-        data : {
+        data: {
           voucher,
-          payment 
-        }
+          payment,
+        },
       });
     } catch (error) {
       res
@@ -244,8 +244,10 @@ module.exports = {
         .sort({ updatedAt: -1 });
 
       res.status(200).json({
-        data: history,
-        count,
+        data: {
+          history,
+          count,
+        },
       });
     } catch (error) {
       res.status(500).json({
