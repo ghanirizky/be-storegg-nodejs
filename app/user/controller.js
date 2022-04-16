@@ -63,7 +63,7 @@ module.exports = {
   },
 
   actionLogout : (req, res) => {
-    req.session.destroy()
+    delete req.session.user
     res.redirect("/")
   }
 
