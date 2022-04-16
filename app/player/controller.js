@@ -178,8 +178,10 @@ module.exports = {
       ]);
 
       res.status(200).json({
-        data: history,
-        total: total.length ? total[0].value : 0,
+        data: {
+          transactions: history,
+          total: total.length ? total[0].value : 0,
+        },
       });
     } catch (error) {
       res.status(500).json({
