@@ -91,6 +91,7 @@ module.exports = {
               username: player.username,
               email: player.email,
               phoneNumber: player.phoneNumber,
+              name : player.name,
               avatar: player.avatar,
             },
           },
